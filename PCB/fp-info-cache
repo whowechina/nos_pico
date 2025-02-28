@@ -1,4 +1,4 @@
-23684590214493534
+23662523233011583
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96614,75 +96614,12 @@ Varistor VF
 2
 2
 nos_main
-B3F4000
-Surface Mount Tactile Switch for High-Density Mounting, 3.1mm height, https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3fs.pdf
-Tactile Switch
-0
-4
-2
-nos_main
-EVQP1K05M
-Surface Mount Tactile Switch for High-Density Mounting, 3.1mm height, https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3fs.pdf
-Tactile Switch
-0
-6
-2
-nos_main
-GP2Y0E03
-
-
-0
-6
-6
-nos_main
-GP2Y0E03_REAL
-
-
-0
-0
-0
-nos_main
-MPR121_BOARD
-UQFN, 20 Pin (https://resurgentsemi.com/wp-content/uploads/2018/09/MPR121_rev5-Resurgent.pdf?d453f8&d453f8), generated with kicad-footprint-generator ipc_noLead_generator.py
-UQFN NoLead
-0
-18
-18
-nos_main
-MaiTouch_Conn34
-
-
-0
-68
-34
-nos_main
-MountingHole_3.2mm_M3
-Mounting Hole 3.2mm, no annular, M3
-mounting hole 3.2mm no annular m3
-0
-0
-0
-nos_main
-PJ393-8P
-PJ31060-I 6pin SMD 3.5mm headphones jack (http://www.china-bsun.com/Product48/1577.html)
-headphones jack plug stereo 3.5mm PJ31060-I PJ31060
-0
-8
-4
-nos_main
 PN532
 
 
 0
 4
 4
-nos_main
-Pogo_5P_Female
-Through hole straight pin header, 1x05, 2.54mm pitch, single row
-Through hole pin header THT 1x05 2.54mm single row
-0
-5
-5
 nos_main
 QFP50P900X900X120-49N
 
@@ -96711,34 +96648,6 @@ Through hole pin header THT 2x20 2.54mm double row
 0
 46
 46
-nos_main
-SKSTAAE010
-Surface Mount Tactile Switch for High-Density Mounting, 3.1mm height, https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3fs.pdf
-Tactile Switch
-0
-2
-2
-nos_main
-Solder_3P
-Through hole straight pin header, 1x05, 2.54mm pitch, single row
-Through hole pin header THT 1x05 2.54mm single row
-0
-3
-3
-nos_main
-Solder_4P
-Through hole straight pin header, 1x05, 2.54mm pitch, single row
-Through hole pin header THT 1x05 2.54mm single row
-0
-4
-4
-nos_main
-Solder_5P
-Through hole straight pin header, 1x05, 2.54mm pitch, single row
-Through hole pin header THT 1x05 2.54mm single row
-0
-5
-5
 nos_main
 WS2812B-1615
 
