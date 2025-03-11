@@ -67,7 +67,7 @@ enum {
       HID_REPORT_COUNT(27), HID_REPORT_SIZE(8),                            \
       HID_LOGICAL_MIN(0x00), HID_LOGICAL_MAX_N(0x00ff, 2),                 \
       HID_USAGE_PAGE(HID_USAGE_PAGE_ORDINAL),                              \
-      HID_STRING_MINIMUM(6), HID_STRING_MAXIMUM(32),                       \
+      HID_STRING_MINIMUM(7), HID_STRING_MAXIMUM(33),                       \
       HID_USAGE_MIN(1), HID_USAGE_MAX(255),                                \
       HID_OUTPUT(HID_DATA | HID_VARIABLE | HID_ABSOLUTE),                  \
       HID_REPORT_COUNT(1),                                                 \

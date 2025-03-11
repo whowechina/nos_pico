@@ -36,8 +36,12 @@
 static void run_lights()
 {
     uint32_t phase = time_us_32() / 50000;
-    for (int i = 0; i < 28; i++) {
-        light_set_key(i, rgb32_from_hsv(0, 0, hammer_analog(i)), false);
+    for (int i = 0; i < hammer_keynum(); i++) {
+        if (hammer_pressed(i)) {
+            light_set_key(i, rgb32_from_hsv(0, 0, hammer_velocity(i)), false);
+        } else {
+            light_set_key(i, 0, false);
+        }
     }
     
     phase = time_us_32() / 10000;
@@ -67,11 +71,34 @@ static void hid_update()
 {
     if (tud_hid_ready()) {
         hid_report.buttons = 0;
-        for (int i = 0; i < 28; i++){
-            hid_report.buttons |= hammer_down(i) ? (1 << i) : 0;
+        for (int i = 0; i < hammer_keynum(); i++){
+            hid_report.buttons |= hammer_pressed(i) ? (1 << i) : 0;
             hid_report.key[i] = 0; //hammer_analog(i);
         }
         tud_hid_n_report(0, REPORT_ID_JOYSTICK, &hid_report, sizeof(hid_report));
+    }
+}
+
+static void proc_midi()
+{
+    static uint8_t key_pitch[7] = { 0, 2, 4, 5, 7, 9, 11 };
+    for (int i = 0; i < hammer_keynum(); i++) {
+        if (hammer_updated(i)) {
+            bool on = hammer_pressed(i);
+            uint16_t vel = hammer_velocity(i);
+            uint8_t note = 36 + (i / 7) * 12 + key_pitch[i % 7];
+
+            vel /= 4;
+            if (vel < 0) {
+                vel = 1;
+            }
+            if (vel > 127) {
+                vel = 127;
+            }
+
+            uint8_t packet[3] = { on ? 0x90 : 0x80, note, vel };
+            tud_midi_stream_write(0, packet, 3);
+        }
     }
 }
 
@@ -80,16 +107,16 @@ static void core0_loop()
     uint64_t next_frame = 0;
     while(1) {
         tud_task();
-
         cli_run();
 
         savedata_loop();
-        cli_fps_count(0);
+
+        hammer_update();
+        proc_midi();
 
         hid_update();
 
-        hammer_update();
-
+        cli_fps_count(0);
         sleep_until(next_frame);
         next_frame += 1001;
     }

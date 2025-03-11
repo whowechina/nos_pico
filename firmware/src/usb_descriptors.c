@@ -78,19 +78,30 @@ uint8_t const* tud_hid_descriptor_report_cb(uint8_t itf)
 // Configuration Descriptor
 //--------------------------------------------------------------------+
 
-enum { ITF_NUM_JOY, ITF_NUM_CLI, ITF_NUM_CLI_DATA, ITF_NUM_TOTAL };
+enum {
+    ITF_NUM_JOY = 0,
+    ITF_NUM_CLI,
+    ITF_NUM_CLI_DATA,
+    ITF_NUM_MIDI,
+    ITF_NUM_MIDI_STREAMING,
+    ITF_NUM_TOTAL
+};
 
 #define CONFIG_TOTAL_LEN (TUD_CONFIG_DESC_LEN + \
                           TUD_HID_DESC_LEN * 1 + \
-                          TUD_CDC_DESC_LEN * 1)
+                          TUD_CDC_DESC_LEN * 1 + \
+                          TUD_MIDI_DESC_LEN * 1)
 
 #define EPNUM_JOY 0x81
+#define EPNUM_MIDI 0x02
+
 
 #define EPNUM_CLI_NOTIF 0x89
 #define EPNUM_CLI_OUT   0x0a
 #define EPNUM_CLI_IN    0x8a
 
-uint8_t const desc_configuration_joy[] = {
+
+uint8_t const desc_configuration[] = {
     // Config number, interface count, string index, total length, attribute,
     // power in mA
     TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN,
@@ -104,13 +115,15 @@ uint8_t const desc_configuration_joy[] = {
  
     TUD_CDC_DESCRIPTOR(ITF_NUM_CLI, 5, EPNUM_CLI_NOTIF,
                        8, EPNUM_CLI_OUT, EPNUM_CLI_IN, 64),
+
+    TUD_MIDI_DESCRIPTOR(ITF_NUM_MIDI, 6, EPNUM_MIDI, 0x80 | EPNUM_MIDI, 64)
 };
 
 // Invoked when received GET CONFIGURATION DESCRIPTOR
 // Application return pointer to descriptor
 // Descriptor contents must exist long enough for transfer to complete
 uint8_t const* tud_descriptor_configuration_cb(uint8_t index) {
-    return desc_configuration_joy;
+    return desc_configuration;
 }
 
 //--------------------------------------------------------------------+
@@ -125,6 +138,7 @@ static const char *string_desc_arr[] = {
     serial_number_str,           // 3: Serials, use chip ID
     "Nos Pico",
     "Nos Pico CLI Port",
+    "Nos MIDI Port",
     "Spinner 1 R",
     "Spinner 1 G",
     "Spinner 1 B",
