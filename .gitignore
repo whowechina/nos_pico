@@ -1,0 +1,5 @@
+PCB/*backups/*
+Production/PCB/*/*
+firmware/*.uf2
+*.bak
+build/*
