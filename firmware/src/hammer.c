@@ -8,6 +8,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "hammer.h"
+
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
@@ -17,8 +19,8 @@
 
 #define KEY_NUM 28
 
-#define PRESS_TRIGGER 500
-#define RELEASE_TRIGGER 400
+#define PRESS_TRIGGER 250
+#define RELEASE_TRIGGER 300
 
 void hammer_init()
 {
@@ -47,6 +49,7 @@ void hammer_init()
     adc_init();
     adc_gpio_init(26 + ADC_CHANNEL);
     adc_select_input(ADC_CHANNEL);
+    //gpio_pull_down(26 + ADC_CHANNEL);
 
     // pwm mode for lower power ripple
     gpio_set_function(25, GPIO_FUNC_PWM);
@@ -62,11 +65,9 @@ uint8_t hammer_keynum()
 static uint16_t reading[KEY_NUM];
 uint64_t reading_time;
 
-static uint16_t offset[KEY_NUM];
-static uint16_t offset_prev[KEY_NUM];
+static uint16_t dist[KEY_NUM];
+static uint16_t dist_prev[KEY_NUM];
 static uint64_t time_prev;
-
-static uint16_t fscale[KEY_NUM];
 
 uint16_t velocity[KEY_NUM];
 bool updated[KEY_NUM];
@@ -94,10 +95,22 @@ static void read_sensors()
         gpio_put(ADC_MUX_A2, chn & 4);
         gpio_put(ADC_MUX_A3, chn & 8);
         gpio_put(ADC_MUX_A4, chn & 16);
-        reading[i] = read_avg(12);
+        reading[i] = read_avg(10);
     }
 
     reading_time = time_us_64();
+
+    if (nos_runtime.debug.hammer) {
+        static uint64_t last_print = 0;
+        if (reading_time - last_print > 200000) {
+            last_print = reading_time;
+            printf(":");
+            for (int i = 0; i < KEY_NUM; i++) {
+                printf(" %4d", reading[i]);
+            }
+            printf("\n");
+        }
+    }
 }
 
 static inline void update_velocity(int chn, int delta)
@@ -109,34 +122,26 @@ static inline void update_velocity(int chn, int delta)
 static void proc_signal()
 {
     for (int i = 0; i < KEY_NUM; i++) {
-        fscale[i] = abs(nos_cfg->baseline[i].pressed - nos_cfg->baseline[i].released);
-
-        int diff = reading[i] - nos_cfg->baseline[i].released;
-        if (nos_cfg->baseline[i].pressed < nos_cfg->baseline[i].released) {
-            diff = -diff;
-        }
-        if (diff > fscale[i]) {
-            diff = fscale[i];
-        }
-        if (diff < 0) {
-            diff = 0;
-        }
-        offset[i] = diff * 1000 / fscale[i];
-        
+        int offset = abs(reading[i] - nos_cfg->baseline[i].center);
+        dist[i] = nos_cfg->baseline[i].magfield * 100 / offset; // in 1/100 mm
 
         if (pressed[i]) {
-            if (offset[i] <= RELEASE_TRIGGER) {
-                update_velocity(i, offset_prev[i] - offset[i]);
+            if (dist[i] >= RELEASE_TRIGGER) {
+                update_velocity(i, dist[i] - dist_prev[i]);
                 pressed[i] = false;
             }
         } else {
-            if (offset[i] >= PRESS_TRIGGER) {
-                update_velocity(i, offset[i] - offset_prev[i]);
+            if (dist[i] <= PRESS_TRIGGER) {
+                update_velocity(i, dist_prev[i] - dist[i]);
                 pressed[i] = true;
+
+                printf("%d", offset);
+                printf("-->%d-%d", dist[i], dist_prev[i]);
+                printf("==>%4d\n", dist_prev[i] - dist[i]);
             }
         }
 
-        offset_prev[i] = offset[i];
+        dist_prev[i] = dist[i];
     }
 }
 
@@ -168,4 +173,97 @@ bool hammer_updated(uint8_t chn)
 uint16_t hammer_raw(uint8_t chn)
 {
     return reading[chn];
+}
+
+void hammer_calibrate()
+{
+    printf("Calibrating key RELEASED...\n");
+
+    uint16_t released[28] = {0};
+    uint16_t pressed[28] = {0};
+
+    int avg[28] = {0};
+    const int avg_count = 1000;
+    for (int i = 0; i < avg_count; i++) {
+        hammer_update();
+        for (int j = 0; j < 28; j++) {
+            avg[j] += hammer_raw(j);
+        }
+    }
+    for (int i = 0; i < 28; i++) {
+        released[i] = avg[i] / avg_count;
+    }
+
+    printf("Calibrating key PRESSED...\n");
+    printf("Please press all keys down, not necessarily simultaneously.\n");
+
+    uint16_t min[28] = {0};
+    uint16_t max[28] = {0};
+    for (int i = 0; i < 28; i++) {
+        min[i] = released[i];
+        max[i] = released[i];
+    }
+    uint64_t stop = time_us_64() + 10000000;
+    while (time_us_64() < stop) {
+        hammer_update();
+        for (int i = 0; i < 28; i++) {
+            int val = hammer_raw(i);
+            if (val < min[i]) {
+                min[i] = val;
+            }
+            if (val > max[i]) {
+                max[i] = val;
+            }
+        }
+    }
+
+    bool success = true;
+    for (int i = 0; i < 28; i++) {
+        int npole_val = max[i] - released[i];
+        int spole_val = released[i] - min[i];
+        bool npole = npole_val > 400;
+        bool spole = spole_val > 400;
+        if (npole != spole) {
+            pressed[i] = npole ? max[i] - 50 : min[i] + 50;
+            released[i] += npole ? 150 : -150;
+        } else {
+            printf("Key %d calibration failed. [%d-%d-%d].\n", i, min[i], released[i], max[i]);
+            success = false;
+            break;
+        }
+    }
+
+    printf("Calibration %s.\n", success ? "succeeded" : "failed");
+
+    if (!success) {
+        return;
+    }
+
+    for (int i = 0; i < KEY_NUM; i++) {
+        int press = pressed[i];
+        int release = released[i];
+
+        /*
+           I'm using this inaccurate (or even wrong) formula to calculate the distance.
+           At least it's better than linear interpolation.
+           magnetic_strength = magfield (aka. magnetic_coinfiency) / distance
+           distance is from the sensor die to the magnet.
+           On a Nos Pico, the distance of key pressed = 1mm, key released = 5mm,
+           given the magnetic strength (hall sensor readings) of both states,
+           we can calculate the center (0 strength) point and the magfield.
+           magfield = abs(press - release) * 5 * 1 / 4;
+           center = (5 * release - 1 * press) / 4;
+           distance = abs(reading - center) * magfield, result is in mm.
+        */
+        nos_cfg->baseline[i].magfield = abs(press - release) * 5 / 4;
+        nos_cfg->baseline[i].center = (5 * release - 1 * press) / 4;
+    }
+   
+    for (int i = 0; i < 28; i++) {
+        printf("Key %2d: %4d -> %4d,  magfield: %d, center: %d.\n", i,
+                released[i], pressed[i],
+                nos_cfg->baseline[i].magfield, nos_cfg->baseline[i].center);
+    }
+
+    config_changed();
 }

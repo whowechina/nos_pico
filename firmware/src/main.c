@@ -65,7 +65,7 @@ static void core1_loop()
 struct __attribute__((packed)) {
     uint32_t buttons;
     uint8_t key[28];
-} hid_report = {0};
+} hid_report, old_hid_report;
 
 static void hid_update()
 {
@@ -73,9 +73,14 @@ static void hid_update()
         hid_report.buttons = 0;
         for (int i = 0; i < hammer_keynum(); i++){
             hid_report.buttons |= hammer_pressed(i) ? (1 << i) : 0;
-            hid_report.key[i] = 0; //hammer_analog(i);
+            hid_report.key[i] = 0; //hammer_velocity(i);
         }
-        tud_hid_n_report(0, REPORT_ID_JOYSTICK, &hid_report, sizeof(hid_report));
+        if (memcmp(&hid_report, &old_hid_report, sizeof(hid_report)) == 0) {
+            return;
+        }
+        if (tud_hid_report(REPORT_ID_JOYSTICK, &hid_report, sizeof(hid_report))) {
+            old_hid_report = hid_report;
+        }
     }
 }
 
@@ -88,8 +93,7 @@ static void proc_midi()
             uint16_t vel = hammer_velocity(i);
             uint8_t note = 36 + (i / 7) * 12 + key_pitch[i % 7];
 
-            vel /= 4;
-            if (vel < 0) {
+            if (vel <= 0) {
                 vel = 1;
             }
             if (vel > 127) {
@@ -118,7 +122,7 @@ static void core0_loop()
 
         cli_fps_count(0);
         sleep_until(next_frame);
-        next_frame += 1001;
+        next_frame += 1000;
     }
 }
 
@@ -139,7 +143,7 @@ void init()
 
     config_init();
     mutex_init(&core1_io_lock);
-    savedata_init(0xca44caac, &core1_io_lock);
+    savedata_init(0xca44caa1, &core1_io_lock);
 
     light_init();
     hammer_init();

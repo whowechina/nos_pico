@@ -96,77 +96,12 @@ static void handle_level(int argc, char *argv[])
 
 static void handle_calibrate()
 {
-    printf("Calibrating key RELEASED...\n");
+    hammer_calibrate();
+}
 
-    uint16_t released[28] = {0};
-    uint16_t pressed[28] = {0};
-
-    int avg[28] = {0};
-    const int avg_count = 1000;
-    for (int i = 0; i < avg_count; i++) {
-        hammer_update();
-        for (int j = 0; j < 28; j++) {
-            avg[j] += hammer_raw(j);
-        }
-    }
-    for (int i = 0; i < 28; i++) {
-        released[i] = avg[i] / avg_count;
-    }
-
-    printf("Calibrating key PRESSED...\n");
-    printf("Please press all keys down, not necessarily simultaneously.\n");
-
-    uint16_t min[28] = {0};
-    uint16_t max[28] = {0};
-    for (int i = 0; i < 28; i++) {
-        min[i] = released[i];
-        max[i] = released[i];
-    }
-    uint64_t stop = time_us_64() + 10000000;
-    while (time_us_64() < stop) {
-        hammer_update();
-        for (int i = 0; i < 28; i++) {
-            int val = hammer_raw(i);
-            if (val < min[i]) {
-                min[i] = val;
-            }
-            if (val > max[i]) {
-                max[i] = val;
-            }
-        }
-    }
-
-    bool success = true;
-    for (int i = 0; i < 28; i++) {
-        int npole_val = max[i] - released[i];
-        int spole_val = released[i] - min[i];
-        bool npole = npole_val > 400;
-        bool spole = spole_val > 400;
-        if (npole != spole) {
-            pressed[i] = npole ? max[i] - 50 : min[i] + 50;
-            released[i] += npole ? 150 : -150;
-        } else {
-            printf("Key %d calibration failed. [%d-%d-%d].\n", i, min[i], released[i], max[i]);
-            success = false;
-            break;
-        }
-    }
-
-    if (success) {
-        for (int i = 0; i < 28; i++) {
-            nos_cfg->baseline[i].released = released[i];
-            nos_cfg->baseline[i].pressed = pressed[i];
-        }
-        config_changed();
-    }
-
-    for (int i = 0; i < 28; i++) {
-        printf("Key %2d: %4d -> %4d, offset: %d.\n", i,
-                nos_cfg->baseline[i].released, nos_cfg->baseline[i].pressed,
-                abs(nos_cfg->baseline[i].pressed - nos_cfg->baseline[i].released));
-    }
-
-    printf("Calibration %s.\n", success ? "succeeded" : "failed");
+static void handle_debug()
+{
+    nos_runtime.debug.hammer ^= true;
 }
 
 static void handle_save()
@@ -185,6 +120,7 @@ void commands_init()
     cli_register("display", handle_display, "Display all config.");
     cli_register("level", handle_level, "Set LED brightness level.");
     cli_register("calibrate", handle_calibrate, "Calibrate the key sensors.");
+    cli_register("debug", handle_debug, "Toggle debug features.");
     cli_register("save", handle_save, "Save config to flash.");
     cli_register("factory", handle_factory_reset, "Reset everything to default.");
 }
