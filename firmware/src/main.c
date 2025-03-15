@@ -36,6 +36,8 @@
 static void run_lights()
 {
     uint32_t phase = time_us_32() / 50000;
+    light_set_logo(rgb32_from_hsv(phase, 255, 255), false);
+
     for (int i = 0; i < hammer_keynum(); i++) {
         if (hammer_pressed(i)) {
             light_set_key(i, rgb32_from_hsv(0, 0, hammer_velocity(i)), false);
@@ -44,8 +46,6 @@ static void run_lights()
         }
     }
     
-    phase = time_us_32() / 10000;
-    light_set_logo(rgb32_from_hsv(phase, 255, 255), false);
 }
 
 static mutex_t core1_io_lock;
