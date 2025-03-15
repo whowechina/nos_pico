@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -100,7 +101,7 @@ static void read_sensors()
 
     reading_time = time_us_64();
 
-    if (nos_runtime.debug.hammer) {
+    if (nos_runtime.debug.sensor) {
         static uint64_t last_print = 0;
         if (reading_time - last_print > 200000) {
             last_print = reading_time;
@@ -135,9 +136,11 @@ static void proc_signal()
                 update_velocity(i, dist_prev[i] - dist[i]);
                 pressed[i] = true;
 
-                printf("%d", offset);
-                printf("-->%d-%d", dist[i], dist_prev[i]);
-                printf("==>%4d\n", dist_prev[i] - dist[i]);
+                if (nos_runtime.debug.velocity) {
+                    printf("Judge offset %4d,", offset);
+                    printf(" Distance delta %d-%d,", dist_prev[i], dist[i]);
+                    printf(" Velocity %d.\n", dist_prev[i] - dist[i]);
+                }
             }
         }
 
@@ -175,24 +178,48 @@ uint16_t hammer_raw(uint8_t chn)
     return reading[chn];
 }
 
-void hammer_calibrate()
+
+static void read_sensors_avg(uint16_t avg[KEY_NUM])
+{
+    const int avg_count = 1000;
+    uint32_t sum[KEY_NUM] = {0};
+
+    for (int i = 0; i < avg_count; i++) {
+        read_sensors();
+        for (int j = 0; j < KEY_NUM; j++) {
+            sum[j] += reading[j];
+        }
+    }
+    for (int i = 0; i < KEY_NUM; i++) {
+        avg[i] = sum[i] / avg_count;
+    }
+}
+
+void hammer_calibrate_origin()
+{
+    printf("Keep all keys far far away from the sensors.\n");
+    printf("Calibrating origin...\n");
+
+    uint16_t origin[KEY_NUM];
+    read_sensors_avg(origin);
+
+    printf("Done.\n");
+    for (int i = 0; i < KEY_NUM; i++) {
+        nos_cfg->sensor.origin[i] = origin[i];
+        printf("Key %2d: %4d.\n", i, origin[i]);
+    }
+
+    config_changed();
+}
+
+void hammer_calibrate_travel()
 {
     printf("Calibrating key RELEASED...\n");
 
     uint16_t released[28] = {0};
     uint16_t pressed[28] = {0};
 
-    int avg[28] = {0};
-    const int avg_count = 1000;
-    for (int i = 0; i < avg_count; i++) {
-        hammer_update();
-        for (int j = 0; j < 28; j++) {
-            avg[j] += hammer_raw(j);
-        }
-    }
-    for (int i = 0; i < 28; i++) {
-        released[i] = avg[i] / avg_count;
-    }
+    read_sensors_avg(released);
 
     printf("Calibrating key PRESSED...\n");
     printf("Please press all keys down, not necessarily simultaneously.\n");
@@ -260,9 +287,9 @@ void hammer_calibrate()
     }
    
     for (int i = 0; i < 28; i++) {
-        printf("Key %2d: %4d -> %4d,  magfield: %d, center: %d.\n", i,
-                released[i], pressed[i],
-                nos_cfg->baseline[i].magfield, nos_cfg->baseline[i].center);
+        printf("Key %2d: %4d -> %4d,  magfield: %d, center: %d (%d).\n", i,
+                released[i], pressed[i], nos_cfg->baseline[i].magfield, 
+                nos_cfg->baseline[i].center, nos_cfg->sensor.origin[i]);
     }
 
     config_changed();

@@ -11,6 +11,9 @@
 
 typedef struct __attribute__((packed)) {
     struct {
+        uint16_t origin[28];
+    } sensor;
+    struct {
         uint16_t magfield;
         uint16_t center;
     } baseline[28];
@@ -26,7 +29,8 @@ typedef struct {
     bool key_stuck;
     bool ext_pedal_invert;
     struct {
-        bool hammer;
+        bool sensor;
+        bool velocity;
     } debug;
 } nos_runtime_t;
 

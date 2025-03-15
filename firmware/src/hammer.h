@@ -13,6 +13,7 @@ uint16_t hammer_velocity(uint8_t chn);
 bool hammer_pressed(uint8_t chn);
 bool hammer_updated(uint8_t chn);
 uint16_t hammer_raw(uint8_t chn);
-void hammer_calibrate();
+void hammer_calibrate_origin();
+void hammer_calibrate_travel();
 
 #endif

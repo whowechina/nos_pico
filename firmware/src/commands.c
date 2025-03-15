@@ -94,14 +94,48 @@ static void handle_level(int argc, char *argv[])
     disp_light();
 }
 
-static void handle_calibrate()
+static void handle_calibrate(int argc, char *argv[])
 {
-    hammer_calibrate();
+    const char *usage = "Usage: calibrate <origin|travel>\n";
+
+    if (argc != 1) {
+        printf(usage);
+        return;
+    }
+
+    const char *choices[] = {"origin", "travel"};
+    switch (cli_match_prefix(choices, count_of(choices), argv[0])) {
+        case 0:
+            hammer_calibrate_origin();
+            break;
+        case 1:
+            hammer_calibrate_travel();
+            break;
+        default:
+            printf(usage);
+            break;
+    }
 }
 
-static void handle_debug()
+static void handle_debug(int argc, char *argv[])
 {
-    nos_runtime.debug.hammer ^= true;
+    const char *usage = "Usage: debug <sensor|velocity>\n";
+    if (argc != 1) {
+        printf(usage);
+        return;
+    }
+    const char *choices[] = {"sensor", "velocity"};
+    switch (cli_match_prefix(choices, count_of(choices), argv[0])) {
+        case 0:
+            nos_runtime.debug.sensor ^= true;
+            break;
+        case 1:
+            nos_runtime.debug.velocity ^= true;
+            break;
+        default:
+            printf(usage);
+            break;
+    }
 }
 
 static void handle_save()
