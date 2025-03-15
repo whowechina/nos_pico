@@ -40,12 +40,15 @@ static void run_lights()
 
     for (int i = 0; i < hammer_keynum(); i++) {
         if (hammer_pressed(i)) {
-            light_set_key(i, rgb32_from_hsv(0, 0, hammer_velocity(i)), false);
+            uint16_t vel = hammer_velocity(i);
+            if (vel > 254) {
+                vel = 254;
+            }
+            light_set_key(i, rgb32_from_hsv(0, 0, vel + 1), false);
         } else {
             light_set_key(i, 0, false);
         }
     }
-    
 }
 
 static mutex_t core1_io_lock;
