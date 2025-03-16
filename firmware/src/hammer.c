@@ -173,6 +173,19 @@ bool hammer_updated(uint8_t chn)
     return false;
 }
 
+uint8_t hammer_analog(uint8_t chn)
+{
+    int analog = (dist[chn] - 100) * 255 / 400;
+    if (analog < 0) {
+        analog = 0;
+    }
+    if (analog > 255) {
+        analog = 255;
+    }
+
+    return analog;
+}
+
 uint16_t hammer_raw(uint8_t chn)
 {
     return reading[chn];

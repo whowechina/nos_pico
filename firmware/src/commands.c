@@ -22,9 +22,18 @@ static void disp_light()
                                                    nos_cfg->light.level_logo);
 }
 
+static void disp_hid()
+{
+    printf("[HID]\n");
+    printf("  Button - %s, Analog - %s, MIDI - %s.\n",
+           nos_cfg->hid.button ? "on" : "off",
+           nos_cfg->hid.analog ? "on" : "off",
+           nos_cfg->hid.midi ? "on" : "off");
+}
+
 void handle_display(int argc, char *argv[])
 {
-    const char *usage = "Usage: display [light]\n";
+    const char *usage = "Usage: display [light|hid]\n";
     if (argc > 1) {
         printf(usage);
         return;
@@ -32,13 +41,17 @@ void handle_display(int argc, char *argv[])
 
     if (argc == 0) {
         disp_light();
+        disp_hid();
         return;
     }
 
-    const char *choices[] = {"light" };
+    const char *choices[] = {"light", "hid" };
     switch (cli_match_prefix(choices, count_of(choices), argv[0])) {
         case 0:
             disp_light();
+            break;
+        case 1:
+            disp_hid();
             break;
         default:
             printf(usage);
@@ -92,6 +105,45 @@ static void handle_level(int argc, char *argv[])
     
     config_changed();
     disp_light();
+}
+
+static void handle_hid(int argc, char *argv[])
+{
+    const char *usage = "Usage: hid <button|analog|midi> [on|off]\n";
+    if (argc < 1) {
+        printf(usage);
+        return;
+    }
+    const char *choices[] = {"button", "analog", "midi"};
+    int choice = cli_match_prefix(choices, count_of(choices), argv[0]);
+
+    int on = 1;
+    if (argc == 2) {
+        const char *on_off[] = {"off", "on"};
+        on = cli_match_prefix(on_off, count_of(on_off), argv[1]);
+    } else if (argc > 2) {
+        on = -1;
+    }
+
+    if ((choice < 0) || (on < 0)) {
+        printf(usage);
+        return;
+    }
+
+    switch (choice) {
+        case 0:
+            nos_cfg->hid.button = on;
+            break;
+        case 1:
+            nos_cfg->hid.analog = on;
+            break;
+        case 2:
+            nos_cfg->hid.midi = on;
+            break;
+    }
+
+    config_changed();
+    disp_hid();
 }
 
 static void handle_calibrate(int argc, char *argv[])
@@ -153,6 +205,7 @@ void commands_init()
 {
     cli_register("display", handle_display, "Display all config.");
     cli_register("level", handle_level, "Set LED brightness level.");
+    cli_register("hid", handle_hid, "Set hid report types.");
     cli_register("calibrate", handle_calibrate, "Calibrate the key sensors.");
     cli_register("debug", handle_debug, "Toggle debug features.");
     cli_register("save", handle_save, "Save config to flash.");

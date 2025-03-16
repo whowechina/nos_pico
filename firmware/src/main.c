@@ -67,28 +67,44 @@ static void core1_loop()
 
 struct __attribute__((packed)) {
     uint32_t buttons;
-    uint8_t key[28];
+    uint8_t analog[28];
 } hid_report, old_hid_report;
 
 static void hid_update()
 {
-    if (tud_hid_ready()) {
-        hid_report.buttons = 0;
+    memset(&hid_report, 0, sizeof(hid_report));
+
+    if (nos_cfg->hid.button) {
         for (int i = 0; i < hammer_keynum(); i++){
             hid_report.buttons |= hammer_pressed(i) ? (1 << i) : 0;
-            hid_report.key[i] = 0; //hammer_velocity(i);
         }
-        if (memcmp(&hid_report, &old_hid_report, sizeof(hid_report)) == 0) {
-            return;
+    }
+
+    if (nos_cfg->hid.analog) {
+        for (int i = 0; i < hammer_keynum(); i++) {
+            hid_report.analog[i] = hammer_analog(i);
         }
-        if (tud_hid_report(REPORT_ID_JOYSTICK, &hid_report, sizeof(hid_report))) {
-            old_hid_report = hid_report;
-        }
+    }
+
+    if (!tud_hid_ready()) {
+        return;
+    }
+    
+    if (memcmp(&hid_report, &old_hid_report, sizeof(hid_report)) == 0) {
+        return;
+    }
+
+    if (tud_hid_report(REPORT_ID_JOYSTICK, &hid_report, sizeof(hid_report))) {
+        old_hid_report = hid_report;
     }
 }
 
 static void proc_midi()
 {
+    if (!nos_cfg->hid.midi) {
+        return;
+    }
+
     static uint8_t key_pitch[7] = { 0, 2, 4, 5, 7, 9, 11 };
     for (int i = 0; i < hammer_keynum(); i++) {
         if (hammer_updated(i)) {

@@ -20,8 +20,15 @@ typedef struct __attribute__((packed)) {
     struct {
         uint8_t level_key;
         uint8_t level_logo;
-        uint8_t reserved[14];
+        uint8_t type;
+        uint8_t reserved[13];
     } light;
+    struct {
+        bool button : 1;
+        bool analog : 1;
+        bool midi : 1;
+        uint8_t reserved[15];
+    } hid;
 } nos_cfg_t;
 
 typedef struct {
