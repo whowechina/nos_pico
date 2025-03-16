@@ -15,6 +15,12 @@ static nos_cfg_t default_cfg = {
     .light = {
         .level_key = 128,
         .level_logo = 64,
+        .type = 2,
+    },
+    .hid = {
+        .button = false,
+        .analog = false,
+        .midi = true,
     },
 };
 

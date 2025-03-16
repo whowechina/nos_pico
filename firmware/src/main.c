@@ -39,21 +39,28 @@ static void run_lights()
     light_set_logo(rgb32_from_hsv(phase, 255, 255), false);
 
     for (int i = 0; i < hammer_keynum(); i++) {
-        if (hammer_pressed(i)) {
-            uint16_t vel = hammer_velocity(i);
-            if (vel > 254) {
-                vel = 254;
+        uint32_t color = 0;
+        if (nos_cfg->light.type == 1) {
+            color = hammer_pressed(i) ? 0x808080 : 0;
+        } else if (nos_cfg->light.type == 2) {
+            color = rgb32_from_hsv(0, 0, 255 - hammer_analog(i));
+        } else if (nos_cfg->light.type == 3) {
+            if (hammer_pressed(i)) {
+                uint16_t vel = hammer_velocity(i);
+                if (vel > 254) {
+                    vel = 254;
+                }
+                color = rgb32_from_hsv(0, 0, vel + 1);
             }
-            light_set_key(i, rgb32_from_hsv(0, 0, vel + 1), false);
-        } else {
-            light_set_key(i, 0, false);
         }
+        light_set_key(i, color, false);
     }
 }
 
 static mutex_t core1_io_lock;
 static void core1_loop()
 {
+    sleep_ms(500);
     while (1) {
         if (mutex_try_enter(&core1_io_lock, NULL)) {
             run_lights();
