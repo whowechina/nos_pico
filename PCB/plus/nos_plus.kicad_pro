@@ -506,7 +506,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "../Production/PCB/nos_main/",
+      "plot": "../../Production/PCB/plus/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "nos_plus_v1.step",

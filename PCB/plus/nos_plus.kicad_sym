@@ -1508,7 +1508,7 @@
 				)
 			)
 		)
-		(property "Footprint" "nos_main:RPi_Pico_SMD_Pins_No_SWD"
+		(property "Footprint" "nos_plus:RPi_Pico_SMD_Pins_No_SWD"
 			(at 0 0 90)
 			(effects
 				(font

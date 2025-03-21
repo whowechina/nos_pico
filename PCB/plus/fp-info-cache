@@ -1,4 +1,4 @@
-24776289560878034
+24778026385962018
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -99602,77 +99602,84 @@ Varistor VF
 0
 2
 2
-nos_main
+nos_plus
 DCDC_3to5
 DCDC-Converter, Artesyn, ATA Series, 3W Single and Dual Output, 1500VDC Isolation, 24.0x13.7x8.0mm https://www.artesyn.com/power/assets/ata_series_ds_01apr2015_79c25814fd.pdf https://www.artesyn.com/power/assets/trn_dc-dc_ata_3w_series_releas1430412818_techref.pdf
 DCDC SMD
 0
 4
 4
-nos_main
+nos_plus
 PN532
 
 
 0
 4
 4
-nos_main
+nos_plus
 QFP50P900X900X120-49N
 
 
 0
 48
 48
-nos_main
+nos_plus
 RPi_Pico_SMD_No_USB
 Through hole straight pin header, 2x20, 2.54mm pitch, double rows
 Through hole pin header THT 2x20 2.54mm double row
 0
 40
 40
-nos_main
+nos_plus
 RPi_Pico_SMD_Pins
 Through hole straight pin header, 2x20, 2.54mm pitch, double rows
 Through hole pin header THT 2x20 2.54mm double row
 0
 46
 46
-nos_main
+nos_plus
 RPi_Pico_SMD_Pins_No_SWD
 Through hole straight pin header, 2x20, 2.54mm pitch, double rows
 Through hole pin header THT 2x20 2.54mm double row
 0
 42
 42
-nos_main
+nos_plus
 RPi_Pico_SMD_Pins_Strip
 Through hole straight pin header, 2x20, 2.54mm pitch, double rows
 Through hole pin header THT 2x20 2.54mm double row
 0
 46
 46
-nos_main
+nos_plus
+SW_Choc_V1V2_Cherry_MX_LED
+Kailh Choc keyswitch CPG1350 V1 CPG1353 V2 with 1.00u keycap
+Kailh Choc Keyswitch Switch CPG1350 V1 CPG1353 V2 Cutout 1.00u
+0
+8
+2
+nos_plus
 WS2812B-1615
 
 
 0
 4
 4
-nos_main
+nos_plus
 WS2812B-2835
 
 
 0
 4
 4
-nos_main
+nos_plus
 WS2812B-4020
 
 
 0
 4
 4
-nos_main
+nos_plus
 WS2812B-4020_UP
 
 
