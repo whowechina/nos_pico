@@ -13,6 +13,7 @@
 #include "pico/multicore.h"
 #include "pico/bootrom.h"
 
+#include "hardware/clocks.h"
 #include "hardware/gpio.h"
 #include "hardware/sync.h"
 #include "hardware/structs/ioqspi.h"
@@ -140,7 +141,6 @@ static void core0_loop()
         cli_run();
 
         savedata_loop();
-
         hammer_update();
         proc_midi();
 
@@ -148,13 +148,27 @@ static void core0_loop()
 
         cli_fps_count(0);
         sleep_until(next_frame);
-        next_frame += 1000;
+        next_frame += 300;
     }
 }
 
 /* if certain key pressed when booting, enter update mode */
 static void update_check()
 {
+    const uint8_t pins[] = BUTTON_DEF;
+    for (int i = 0; i < count_of(pins); i++) {
+        uint8_t gpio = pins[i];
+        gpio_init(gpio);
+        gpio_set_function(gpio, GPIO_FUNC_SIO);
+        gpio_set_dir(gpio, GPIO_IN);
+        gpio_pull_up(gpio);
+    }
+
+    if (!gpio_get(pins[0]) && !gpio_get(pins[1])) {
+        sleep_ms(100);
+        reset_usb_boot(0, 2);
+        return;
+    }
 }
 
 void init()
@@ -163,6 +177,8 @@ void init()
     board_init();
 
     update_check();
+
+    set_sys_clock_khz(166000, true);
 
     tusb_init();
     stdio_init_all();
