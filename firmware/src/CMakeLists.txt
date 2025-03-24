@@ -1,7 +1,7 @@
 function(make_firmware board board_def)
     pico_sdk_init()
     add_executable(${board}
-        main.c light.c hammer.c savedata.c config.c commands.c cli.c
+        main.c light.c hammer.c button.c savedata.c config.c commands.c cli.c
         usb_descriptors.c)
     target_compile_definitions(${board} PUBLIC ${board_def})
     pico_enable_stdio_usb(${board} 1)

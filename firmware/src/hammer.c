@@ -67,8 +67,8 @@ static uint16_t reading[KEY_NUM];
 uint64_t reading_time;
 
 static uint16_t dist[KEY_NUM];
-static uint16_t dist_prev[KEY_NUM];
-static uint64_t time_prev;
+static uint16_t dist_old[3][KEY_NUM];
+static uint64_t time_old[3];
 
 uint16_t velocity[KEY_NUM];
 bool updated[KEY_NUM];
@@ -77,6 +77,7 @@ bool pressed[KEY_NUM];
 static inline uint16_t read_avg(int count)
 {
     uint32_t sum = 0;
+    sleep_us(3);
     for (int i = 0; i < count; i++) {
         sum += adc_read();
     }
@@ -87,8 +88,6 @@ static void read_sensors()
 {
     static const uint8_t key_map[KEY_NUM] = ADC_KEY_CHN;
 
-    time_prev = reading_time;
-
     for (int i = 0; i < KEY_NUM; i++) {
         uint8_t chn = key_map[i];
         gpio_put(ADC_MUX_A0, chn & 1);
@@ -96,7 +95,7 @@ static void read_sensors()
         gpio_put(ADC_MUX_A2, chn & 4);
         gpio_put(ADC_MUX_A3, chn & 8);
         gpio_put(ADC_MUX_A4, chn & 16);
-        reading[i] = read_avg(10);
+        reading[i] = read_avg(2);
     }
 
     reading_time = time_us_64();
@@ -114,9 +113,10 @@ static void read_sensors()
     }
 }
 
-static inline void update_velocity(int chn, int delta)
+static inline void update_velocity(int chn)
 {
-    velocity[chn] = delta * 1000 / (reading_time - time_prev);
+    uint16_t delta = abs(dist[chn] - dist_old[2][chn]);
+    velocity[chn] = delta * 1000 / (reading_time - time_old[2]);
     updated[chn] = true;
 }
 
@@ -128,30 +128,39 @@ static void proc_signal()
 
         if (pressed[i]) {
             if (dist[i] >= RELEASE_TRIGGER) {
-                update_velocity(i, dist[i] - dist_prev[i]);
                 pressed[i] = false;
+                update_velocity(i);
             }
         } else {
             if (dist[i] <= PRESS_TRIGGER) {
-                update_velocity(i, dist_prev[i] - dist[i]);
                 pressed[i] = true;
+                update_velocity(i);
 
                 if (nos_runtime.debug.velocity) {
-                    printf("Judge offset %4d,", offset);
-                    printf(" Distance delta %d-%d,", dist_prev[i], dist[i]);
-                    printf(" Velocity %d.\n", dist_prev[i] - dist[i]);
+                    printf(" Distance delta %d-%d,", dist_old[2][i], dist[i]);
+                    printf(" Velocity %d.\n", dist_old[2][i] - dist[i]);
                 }
             }
         }
-
-        dist_prev[i] = dist[i];
     }
+}
+
+static void buffer_readings()
+{
+    time_old[2] = time_old[1];
+    time_old[1] = time_old[0];
+    time_old[0] = reading_time;
+
+    memcpy(dist_old[2], dist_old[1], sizeof(dist_old[0]));
+    memcpy(dist_old[1], dist_old[0], sizeof(dist_old[0]));
+    memcpy(dist_old[0], dist, sizeof(dist));
 }
 
 void hammer_update()
 {
     read_sensors();
     proc_signal();
+    buffer_readings();
 }
 
 uint16_t hammer_velocity(uint8_t chn)
@@ -291,12 +300,14 @@ void hammer_calibrate_travel()
            On a Nos Pico, the distance of key pressed = 1mm, key released = 5mm,
            given the magnetic strength (hall sensor readings) of both states,
            we can calculate the center (0 strength) point and the magfield.
-           magfield = abs(press - release) * 5 * 1 / 4;
-           center = (5 * release - 1 * press) / 4;
+              magfield = abs(press - release) * 5 * 1 / 4;
+              center = (5 * release - 1 * press) / 4;
            distance = abs(reading - center) * magfield, result is in mm.
+
+           We treat Nos Pico+ as if it has same travel distance as Nos Pico.
         */
-        nos_cfg->baseline[i].magfield = abs(press - release) * 5 / 4;
-        nos_cfg->baseline[i].center = (5 * release - 1 * press) / 4;
+            nos_cfg->baseline[i].magfield = abs(press - release) * 5 / 4;
+            nos_cfg->baseline[i].center = (5 * release - 1 * press) / 4;
     }
    
     for (int i = 0; i < 28; i++) {
