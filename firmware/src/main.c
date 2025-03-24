@@ -31,6 +31,7 @@
 
 #include "light.h"
 #include "hammer.h"
+#include "button.h"
 
 #define WHITE 0xffffff
 
@@ -88,10 +89,10 @@ static void hid_update()
         }
     }
 
-    if (nos_cfg->hid.analog) {
-        for (int i = 0; i < hammer_keynum(); i++) {
-            hid_report.analog[i] = hammer_analog(i);
-        }
+    hid_report.buttons |= button_read() << 28;
+
+    for (int i = 0; i < hammer_keynum(); i++) {
+        hid_report.analog[i] = nos_cfg->hid.analog ? hammer_analog(i) : 127;
     }
 
     if (!tud_hid_ready()) {
@@ -143,7 +144,7 @@ static void core0_loop()
         savedata_loop();
         hammer_update();
         proc_midi();
-
+        button_update();
         hid_update();
 
         cli_fps_count(0);
@@ -189,6 +190,7 @@ void init()
 
     light_init();
     hammer_init();
+    button_init();
 
     cli_init("nos_pico>", "\n   << Nos Pico Controller >>\n"
                             " https://github.com/whowechina\n\n");
