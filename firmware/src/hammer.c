@@ -74,43 +74,30 @@ uint16_t velocity[KEY_NUM];
 bool updated[KEY_NUM];
 bool pressed[KEY_NUM];
 
+static inline void select_channel(int chn)
+{
+    static const uint8_t key_map[KEY_NUM] = ADC_KEY_CHN;
+
+    uint8_t mask = key_map[chn];
+    gpio_put(ADC_MUX_A0, mask & 1);
+    gpio_put(ADC_MUX_A1, mask & 2);
+    gpio_put(ADC_MUX_A2, mask & 4);
+    gpio_put(ADC_MUX_A3, mask & 8);
+    gpio_put(ADC_MUX_A4, mask & 16);
+}
+
 static inline uint16_t read_avg(int count)
 {
     uint32_t sum = 0;
-    sleep_us(3);
     for (int i = 0; i < count; i++) {
         sum += adc_read();
     }
     return sum / count;
 }
 
-static void read_sensors()
+static void read_sensor(int chn)
 {
-    static const uint8_t key_map[KEY_NUM] = ADC_KEY_CHN;
-
-    for (int i = 0; i < KEY_NUM; i++) {
-        uint8_t chn = key_map[i];
-        gpio_put(ADC_MUX_A0, chn & 1);
-        gpio_put(ADC_MUX_A1, chn & 2);
-        gpio_put(ADC_MUX_A2, chn & 4);
-        gpio_put(ADC_MUX_A3, chn & 8);
-        gpio_put(ADC_MUX_A4, chn & 16);
-        reading[i] = read_avg(2);
-    }
-
-    reading_time = time_us_64();
-
-    if (nos_runtime.debug.sensor) {
-        static uint64_t last_print = 0;
-        if (reading_time - last_print > 200000) {
-            last_print = reading_time;
-            printf(":");
-            for (int i = 0; i < KEY_NUM; i++) {
-                printf(" %4d", reading[i]);
-            }
-            printf("\n");
-        }
-    }
+    reading[chn] = read_avg(1);
 }
 
 static inline void update_velocity(int chn)
@@ -120,47 +107,51 @@ static inline void update_velocity(int chn)
     updated[chn] = true;
 }
 
-static void proc_signal()
+static void proc_signal(int chn)
 {
-    for (int i = 0; i < KEY_NUM; i++) {
-        int offset = abs(reading[i] - nos_cfg->baseline[i].center);
-        dist[i] = nos_cfg->baseline[i].magfield * 100 / offset; // in 1/100 mm
+    int offset = abs(reading[chn] - nos_cfg->baseline[chn].center);
+    dist[chn] = nos_cfg->baseline[chn].magfield * 100 / offset; // in 1/100 mm
 
-        if (pressed[i]) {
-            if (dist[i] >= RELEASE_TRIGGER) {
-                pressed[i] = false;
-                update_velocity(i);
-            }
-        } else {
-            if (dist[i] <= PRESS_TRIGGER) {
-                pressed[i] = true;
-                update_velocity(i);
+    if (pressed[chn]) {
+        if (dist[chn] >= RELEASE_TRIGGER) {
+            pressed[chn] = false;
+            update_velocity(chn);
+        }
+    } else {
+        if (dist[chn] <= PRESS_TRIGGER) {
+            pressed[chn] = true;
+            update_velocity(chn);
 
-                if (nos_runtime.debug.velocity) {
-                    printf(" Distance delta %d-%d,", dist_old[2][i], dist[i]);
-                    printf(" Velocity %d.\n", dist_old[2][i] - dist[i]);
-                }
+            if (nos_runtime.debug.velocity) {
+                printf(" Distance delta %d-%d,", dist_old[2][chn], dist[chn]);
+                printf(" Velocity %d.\n", dist_old[2][chn] - dist[chn]);
             }
         }
     }
 }
 
-static void buffer_readings()
+static void buffer_readings(int chn)
 {
-    time_old[2] = time_old[1];
-    time_old[1] = time_old[0];
-    time_old[0] = reading_time;
-
-    memcpy(dist_old[2], dist_old[1], sizeof(dist_old[0]));
-    memcpy(dist_old[1], dist_old[0], sizeof(dist_old[0]));
-    memcpy(dist_old[0], dist, sizeof(dist));
+    dist_old[2][chn] = dist_old[1][chn];
+    dist_old[1][chn] = dist_old[0][chn];
+    dist_old[0][chn] = dist[chn];
 }
 
 void hammer_update()
 {
-    read_sensors();
-    proc_signal();
-    buffer_readings();
+    reading_time = time_us_64();
+
+    for (int i = 0; i < KEY_NUM; i++) {
+        read_sensor(i);
+        select_channel((i + 1) % KEY_NUM); // for the next reading
+        proc_signal(i);
+        buffer_readings(i);
+        sleep_us(1);
+    }
+
+    time_old[2] = time_old[1];
+    time_old[1] = time_old[0];
+    time_old[0] = reading_time;
 }
 
 uint16_t hammer_velocity(uint8_t chn)
@@ -200,15 +191,16 @@ uint16_t hammer_raw(uint8_t chn)
     return reading[chn];
 }
 
-
 static void read_sensors_avg(uint16_t avg[KEY_NUM])
 {
     const int avg_count = 1000;
     uint32_t sum[KEY_NUM] = {0};
 
     for (int i = 0; i < avg_count; i++) {
-        read_sensors();
         for (int j = 0; j < KEY_NUM; j++) {
+            select_channel(j);
+            sleep_us(2);
+            read_sensor(j);
             sum[j] += reading[j];
         }
     }
