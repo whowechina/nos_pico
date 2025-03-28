@@ -149,7 +149,7 @@ static void core0_loop()
 
         cli_fps_count(0);
         sleep_until(next_frame);
-        next_frame += 166;
+        next_frame += 250;
     }
 }
 

@@ -97,7 +97,7 @@ static inline uint16_t read_avg(int count)
 
 static void read_sensor(int chn)
 {
-    reading[chn] = read_avg(1);
+    reading[chn] = read_avg(2);
 }
 
 static inline void update_velocity(int chn)
