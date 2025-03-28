@@ -410,9 +410,9 @@
 		(uuid "adefe771-6f66-4ecb-9e04-c354bf639d65")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/3dmodels/Kailh Polia.step"
+	(model "${KIPRJMOD}/3dmodels/Kailh_polia_mod.step"
 		(offset
-			(xyz 0 0 5)
+			(xyz 0 0 4.93)
 		)
 		(scale
 			(xyz 1 1 1)

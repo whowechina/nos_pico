@@ -949,6 +949,142 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Switch:SW_SPST"
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SW_SPST"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Single Pole Single Throw (SPST) switch"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "switch lever"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_SPST_0_0"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 0.254) (xy 1.524 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SW_SPST_1_1"
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Type-C:HRO-TYPE-C-31-M-12"
 			(pin_names
 				(offset 1.016)
@@ -3826,6 +3962,12 @@
 		(uuid "0d6507ee-dadb-4d35-b720-4f007ffbb1f1")
 	)
 	(junction
+		(at 99.06 108.585)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0eccefed-f0ce-4dfa-b98d-ee61f189e1e9")
+	)
+	(junction
 		(at 328.295 266.7)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4124,6 +4266,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3899c8b9-8622-458d-bce9-6704bc62c148")
+	)
+	(junction
+		(at 99.06 116.205)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "391e1946-4816-4240-b631-81c4a4f12ae3")
 	)
 	(junction
 		(at 315.595 274.32)
@@ -4772,6 +4920,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "92856183-b3a2-4c7f-83bd-7c3936fb4734")
+	)
+	(junction
+		(at 99.06 123.825)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9310ac33-78e9-4ed9-9344-34e283c0d530")
 	)
 	(junction
 		(at 76.2 37.465)
@@ -5823,6 +5977,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 109.22) (xy 126.365 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08febcb2-e0be-421d-9eeb-9c39d75f4030")
+	)
+	(wire
+		(pts
 			(xy 226.695 193.04) (xy 239.395 193.04)
 		)
 		(stroke
@@ -5850,6 +6014,16 @@
 			(type default)
 		)
 		(uuid "0c01e338-3c8c-41b2-9890-1d7240c59db9")
+	)
+	(wire
+		(pts
+			(xy 126.365 100.965) (xy 116.84 100.965)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d2ef95e-b6cd-4982-8d5d-55b5853a120e")
 	)
 	(wire
 		(pts
@@ -6133,6 +6307,16 @@
 	)
 	(wire
 		(pts
+			(xy 106.68 100.965) (xy 99.06 100.965)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e988250-ed96-4529-9b17-e7f4746d34d2")
+	)
+	(wire
+		(pts
 			(xy 61.595 215.9) (xy 74.295 215.9)
 		)
 		(stroke
@@ -6393,6 +6577,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 116.205) (xy 116.84 116.205)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2fdebeaf-5227-4f85-8d3a-699a1e4b095a")
+	)
+	(wire
+		(pts
 			(xy 99.695 208.28) (xy 112.395 208.28)
 		)
 		(stroke
@@ -6450,6 +6644,16 @@
 			(type default)
 		)
 		(uuid "325acf9f-1cfb-445b-9b92-83b564c44a37")
+	)
+	(wire
+		(pts
+			(xy 99.06 116.205) (xy 106.68 116.205)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "329819f0-f303-4897-8f18-78e03e7cb99c")
 	)
 	(wire
 		(pts
@@ -6910,6 +7114,16 @@
 			(type default)
 		)
 		(uuid "55e19767-57b1-475b-966d-20e889d0a5e5")
+	)
+	(wire
+		(pts
+			(xy 99.06 100.965) (xy 99.06 108.585)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5627db6b-c34e-4f73-9518-743b8e754e74")
 	)
 	(wire
 		(pts
@@ -7383,6 +7597,16 @@
 	)
 	(wire
 		(pts
+			(xy 116.84 123.825) (xy 126.365 123.825)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7297cee0-a0d1-4a01-9544-0056ba5e8a6f")
+	)
+	(wire
+		(pts
 			(xy 327.66 36.195) (xy 323.215 36.195)
 		)
 		(stroke
@@ -7420,6 +7644,16 @@
 			(type default)
 		)
 		(uuid "79128f9a-8259-4e53-8b4e-1a1bf8d636c8")
+	)
+	(wire
+		(pts
+			(xy 99.06 123.825) (xy 106.68 123.825)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79306484-010e-4b8b-a1d9-4339791bc54f")
 	)
 	(wire
 		(pts
@@ -7563,6 +7797,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 108.585) (xy 116.84 108.585)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80d21545-b450-4481-a6d8-82a57aee613f")
+	)
+	(wire
+		(pts
 			(xy 432.435 274.32) (xy 447.675 274.32)
 		)
 		(stroke
@@ -7673,6 +7917,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 108.585) (xy 99.06 116.205)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a01bad7-dbe6-4d22-8826-fd1939a96c96")
+	)
+	(wire
+		(pts
 			(xy 285.75 146.685) (xy 276.225 146.685)
 		)
 		(stroke
@@ -7780,6 +8034,16 @@
 			(type default)
 		)
 		(uuid "928d27c7-f275-4af9-8e2e-afdee3afc99f")
+	)
+	(wire
+		(pts
+			(xy 99.06 108.585) (xy 106.68 108.585)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92c8d6c3-986f-4bb0-80fa-bb7115f58cb9")
 	)
 	(wire
 		(pts
@@ -8223,6 +8487,16 @@
 	)
 	(wire
 		(pts
+			(xy 126.365 109.22) (xy 126.365 100.965)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ae8579c6-e3b5-483f-9e71-d697073c9658")
+	)
+	(wire
+		(pts
 			(xy 245.745 161.925) (xy 42.545 161.925)
 		)
 		(stroke
@@ -8250,6 +8524,16 @@
 			(type default)
 		)
 		(uuid "b1faf1d4-5edc-4dc0-ad73-b0bdfc0af1ca")
+	)
+	(wire
+		(pts
+			(xy 99.06 123.825) (xy 99.06 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b25baccf-f4f3-4b75-bb17-7c49a7191543")
 	)
 	(wire
 		(pts
@@ -8423,6 +8707,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 116.205) (xy 99.06 123.825)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba76802f-14b0-4fb6-863e-d78c2bd61d71")
+	)
+	(wire
+		(pts
 			(xy 86.995 259.08) (xy 99.695 259.08)
 		)
 		(stroke
@@ -8540,6 +8834,16 @@
 			(type default)
 		)
 		(uuid "c1bf4e40-bcf8-44ad-b1db-98ab1a16b06a")
+	)
+	(wire
+		(pts
+			(xy 146.05 114.3) (xy 120.65 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1f19bb1-59c2-4478-ac65-6ad25e909927")
 	)
 	(wire
 		(pts
@@ -8973,6 +9277,16 @@
 	)
 	(wire
 		(pts
+			(xy 126.365 116.84) (xy 146.05 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1d51054-0c01-4c03-bab4-d722d2e3e405")
+	)
+	(wire
+		(pts
 			(xy 175.895 208.28) (xy 188.595 208.28)
 		)
 		(stroke
@@ -9163,6 +9477,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 114.3) (xy 120.65 116.205)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb43f291-8e7e-413d-b768-be6da92650df")
+	)
+	(wire
+		(pts
 			(xy 112.395 231.14) (xy 125.095 231.14)
 		)
 		(stroke
@@ -9190,6 +9514,16 @@
 			(type default)
 		)
 		(uuid "ec3bd011-ab6d-4136-be99-422d44d67f43")
+	)
+	(wire
+		(pts
+			(xy 126.365 123.825) (xy 126.365 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ec4fb80b-78b0-4558-b87a-ff10dfbd55de")
 	)
 	(wire
 		(pts
@@ -9463,6 +9797,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 111.76) (xy 120.65 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff326c87-ab55-486e-9d6c-6b53c2e7ba85")
+	)
+	(wire
+		(pts
 			(xy 99.695 243.84) (xy 112.395 243.84)
 		)
 		(stroke
@@ -9470,6 +9814,16 @@
 			(type default)
 		)
 		(uuid "ff7467fa-1a2b-49fe-a459-dc75cbaf1307")
+	)
+	(wire
+		(pts
+			(xy 120.65 111.76) (xy 120.65 108.585)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff8270a3-89ce-4c18-aae4-0d4563ab3758")
 	)
 	(wire
 		(pts
@@ -11757,6 +12111,74 @@
 			(project "nos_main"
 				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 111.76 108.585 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1b5080cd-3ece-4d7a-bd85-b578bea05963")
+		(property "Reference" "SW3"
+			(at 110.49 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 111.76 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "nos_main:SW_SKHHANA010_Combo"
+			(at 111.76 108.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 108.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 111.76 108.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1e2819c2-e0a8-4578-bbc7-74954f95f801")
+		)
+		(pin "1"
+			(uuid "a9aa5025-310a-433d-8980-c42afc4c1ac3")
+		)
+		(instances
+			(project "nos_main"
+				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
+					(reference "SW3")
 					(unit 1)
 				)
 			)
@@ -15590,6 +16012,74 @@
 			(project "nos_main"
 				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
 					(reference "C52")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 111.76 123.825 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "698a9e02-32d0-40dc-9dd3-7b880bba4663")
+		(property "Reference" "SW1"
+			(at 110.49 121.285 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 111.76 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "nos_main:SW_SKHHANA010_Combo"
+			(at 111.76 123.825 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 123.825 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 111.76 123.825 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "93f912a9-0faf-4344-ba1c-342ca0fd1997")
+		)
+		(pin "1"
+			(uuid "a5ba454e-ff3c-41c0-a5a1-7d5d02dd3c70")
+		)
+		(instances
+			(project "nos_main"
+				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
+					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -20288,6 +20778,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 99.06 130.81 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b7702b24-ce23-4116-b841-525622213a9e")
+		(property "Reference" "#PWR0126"
+			(at 99.06 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.187 135.2042 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 99.06 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 99.06 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "07f2d6cd-b0cd-41de-8919-a37415606f89")
+		)
+		(instances
+			(project "nos_main"
+				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
+					(reference "#PWR0126")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "nos_main:SS49E_SOT23")
 		(at 323.85 153.035 0)
 		(unit 1)
@@ -20434,6 +20989,74 @@
 			(project "nos_main"
 				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
 					(reference "H17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 111.76 100.965 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bbcf75e5-ce81-4366-95c9-aba3bb525b9e")
+		(property "Reference" "SW4"
+			(at 110.49 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 111.76 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "nos_main:SW_SKHHANA010_Combo"
+			(at 111.76 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 111.76 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "554f5a53-9b49-4e84-acf9-40a9bda7ace6")
+		)
+		(pin "1"
+			(uuid "943f9604-f4a8-4251-98d0-2e30663ee1ea")
+		)
+		(instances
+			(project "nos_main"
+				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
+					(reference "SW4")
 					(unit 1)
 				)
 			)
@@ -21094,6 +21717,74 @@
 			(project "nos_main"
 				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
 					(reference "D17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_SPST")
+		(at 111.76 116.205 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cbe97c35-1232-4fd7-9769-fe831dc2596a")
+		(property "Reference" "SW2"
+			(at 110.49 113.665 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_SPST"
+			(at 111.76 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "nos_main:SW_SKHHANA010_Combo"
+			(at 111.76 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single Pole Single Throw (SPST) switch"
+			(at 111.76 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d5ac8576-c411-4187-b2a2-2054ceafb245")
+		)
+		(pin "1"
+			(uuid "4392d9d4-58ab-4e70-9289-2b252a2f4eb4")
+		)
+		(instances
+			(project "nos_main"
+				(path "/2e3f5573-c264-4a8b-a2f0-0e6473d39aad"
+					(reference "SW2")
 					(unit 1)
 				)
 			)
