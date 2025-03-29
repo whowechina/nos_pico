@@ -13,8 +13,8 @@ nos_cfg_t *nos_cfg;
 
 static nos_cfg_t default_cfg = {
     .light = {
-        .level_key = 128,
-        .level_logo = 64,
+        .level_key = 64,
+        .level_logo = 24,
         .type = 2,
     },
     .hid = {
