@@ -161,6 +161,8 @@ Please note that the quantities of the screws are approximate.
   * 28x 3mm\*2mm axial magnetized cylinder magnets (3mm diameter, 2mm height).
 
 #### Steps
+Please note that the pictures in this section are mixed with Nos Pico and Nos Pico+, some are even from prototype. But the assembly steps are the same. So ignore the differences in some details.
+
 1. Use the M3\*6mm screws to fix the PCB to the base part.  
    <img src="doc/pcb_screws.jpg" width="70%">
 2. Apply the 2.5mm thick foam tape on PCB, right below the hall effect sensors. It damps the key press noise. 3mm width is recommended for Nos Pico, and 5mm width is recommended for Nos Pico+.  
