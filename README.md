@@ -3,13 +3,13 @@
 
 <img src="doc/main.jpg" width="80%">
 
-Currently there're two sizes of Nos Pico. Nos Pico is the small one, suitable for 14 to 17 inch monitors. Nos Pico+ is the larger one, suitable for 24 to 27 inch monitors. There're no differences except the size.
+Currently there're two sizes of Nos Pico. Nos Pico is the small one, suitable for 15 to 17 inch monitors. Nos Pico+ is the larger one, suitable for 24 to 27 inch monitors. There're no differences except the size.
 
 Features:
 * All 3D printed parts.
 * Velocity sensitive.
 * RGB key lights.
-* Also work as MIDI keyboard.
+* Works as MIDI keyboard.
 * HID lights.
 * 4 extra programmable buttons.
 
@@ -34,7 +34,7 @@ You can check out my other cool projects.
 <img src="https://github.com/whowechina/popn_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/iidx_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/iidx_teeny/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/chu_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/mai_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/diva_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/aic_pico/raw/main/doc/main.gif" height="100px"> <img src="https://github.com/whowechina/groove_pico/raw/main/doc/main.gif" height="100px">  <img src="https://github.com/whowechina/geki_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/musec_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/ju_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/bishi_pico/raw/main/doc/main.jpg" height="100px"> <img src="https://github.com/whowechina/nos_pico/raw/main/doc/main.jpg" height="100px">
 
 
-* Nos Pico: https://github.com/whowechina/popn_pico
+* Popn Pico: https://github.com/whowechina/popn_pico
 * IIDX Pico: https://github.com/whowechina/iidx_pico
 * IIDX Teeny: https://github.com/whowechina/iidx_teeny
 * Chu Pico: https://github.com/whowechina/chu_pico
@@ -81,24 +81,28 @@ https://www.dfrobot.com/product-1766.html
   * 4x Kailh Box Cream Pro switches.  
     https://www.kailh.net/products/kailh-box-cream-pro-switch-set
 
-* This is how Nos Pico look after soldering.  
+* This is how Nos Pico looks after soldering.  
   <img src="doc/pico_pcb1.jpg" width="70%">  
   <img src="doc/pico_pcb2.jpg" width="30%">
 
-* This is how Nos Pico+ look after soldering.  
+* This is how Nos Pico+ looks after soldering.  
   <img src="doc/plus_pcb1.jpg" width="95%">  
   <img src="doc/plus_pcb2.jpg" width="30%">
 
 ### Notes
 1. About the 2 USB holes, you decide whether to solder them or not.   
-  <img src="doc/usb_txrx.jpg" width="20%">
-  * If you solder these 2 hole pins.
-    * Pros: ether USB ports can be used for host communication; if your pico has a micro USB port, now you'll have a Type-C port and a micro USB port.
-    * Cons: if one port is for host communication, the other port can use for power supply, but only from power bank or charger, not from a USB data port.
-  * Or you tape the pins to avoid soldering them.
-    * Pros: only the port from Pi Pico can be used for host communication, the other port can only be used for power supply.
-    * Cons: the power supply port can connect to any USB port, inluding USB data ports, power banks or chargers.
+   <img src="doc/usb_txrx.jpg" width="20%">
+
+   * If you solder these 2 hole pins.
+     * Pros: ether USB ports can be used for host communication; if your pico has a micro USB port, now you'll have a Type-C port and a micro USB port.
+     * Cons: if one port is for host communication, the other port can use for power supply, but only from power bank or charger, not from a USB data port.
+
+   * Or you don't solder them (and also better use thin tape to cover the pins on Pi Pico).
+     * Pros: only the port from Pi Pico can be used for host communication, the other port can only be used for power supply.
+     * Cons: the power supply port can connect to any USB port, inluding USB data ports, power banks or chargers.
+
 2. There're so many capacitors for de-coupling. You don't need to solder them all. You can solder some of them, just distribute them evenly. The one near the multiplexer is a must.
+
 3. Leave C30 un-soldered.
 
 ### Test the PCB
@@ -117,17 +121,18 @@ https://www.dfrobot.com/product-1766.html
 #### Printing parameters  
 * PLA or PETG.
 * Layer height: 0.2mm
-* Wall: >= 3.
-* Support: Yes, always, but only on bed and no need for bridges.
+* Wall: 2 to 3.
+* Support: No, unless explicitly mentioned.
 * Files are always in milimeter unit, not inch.
 
 #### Parts
 * All files are in `Production\3DPrint` folder.
 * File names started with `Nos Pico -` are for Nos Pico, and `Nos Pico+ -` are for Nos Pico+.
 
-* Keys: `Key.3mf`. Print 28 keys, 8 all-white, and 20 white-with-black tops (with "black key"). You need multi-color printing for the keys, or you need to manually paint the black part.
+* Keys: `Key.3mf`. Print 28 keys, 8 all-white, and 20 white-with-black tops (with "black key"). You need multi-color printing for the keys, or you need to manually paint the black part.  
+  <img src="doc/keys.jpg" width="50%">
 * Base: `Base_*.stl`, all in light apricot color.
-* Rear: `Rear_*.stl`, all in light apricot color.
+* Rear: `Rear_*.stl`, all in light apricot color. Make the side with the screws as the bottom and enable support.
 * Support: `Support_*.stl`, Left and Right are in light apricot color and Center is in white color.
 * Panel: `Panel_*.stl`, Left and Right are in light apricot color. The Center is in white color with the black logo on top. You can use multi-color to print it or paint it manually.
 
@@ -145,6 +150,8 @@ Please note that the quantities of the screws are approximate.
 * 28x 0.4\*5\*10\*6N (0.4mm wire diameter, 5mm outer diameter, 10mm free length, 6 turns) springs.
 * Some white silicone adhesive, such as K-704 silicone industrial adhesive.
 
+* Some 10mm diameter silicone self-adhesive anti-slip pads.  
+
 * For Nos Pico only.
   * 7x 2mm\*50mm steel shafts. (alternatively 14x 2mm\*25mm).
   * 28x 2mm\*2mm axial magnetized cylinder magnets (2mm diameter, 2mm height).
@@ -154,18 +161,35 @@ Please note that the quantities of the screws are approximate.
   * 28x 3mm\*2mm axial magnetized cylinder magnets (3mm diameter, 2mm height).
 
 #### Steps
-1. Use the M3*6mm screws to fix the PCB to the base part.
-2. Apply the 2.5mm thick foam tape on PCB, right below the hall effect sensors. It damps the key press noise. 3mm width is recommended for Nos Pico, and 5mm width is recommended for Nos Pico+.
+1. Use the M3\*6mm screws to fix the PCB to the base part.  
+   <img src="doc/pcb_screws.jpg" width="70%">
+2. Apply the 2.5mm thick foam tape on PCB, right below the hall effect sensors. It damps the key press noise. 3mm width is recommended for Nos Pico, and 5mm width is recommended for Nos Pico+.  
+   <img src="doc/press_damping.jpg" width="50%">
 3. Use the M3*8mm screws to fix the support parts to the base part. The support part is the one with 2 holes for the USB port.
-4. Insert the steel shafts into keys and install them into the base parts. Please note the key arrangements.
+   <img src="doc/support_screws.jpg" width="70%">
+4. Insert the steel shafts into keys and install them into the base parts. Please note the key arrangements.  
+   <img src="doc/key_assembly1.jpg" width="50%">  
+   <img src="doc/key_assembly2.jpg" width="70%">
 5. Rotate the keys to the other side to insert the magnets into the keys. Cylinder magnets should be placed vertically. You need some glue or silicone adhesive to fix them in place.
-7. Install the springs on the base parts, and rotate the keys onto them.
-8. Now we temporarily calibrate and test the keys use `calibrate travel` command. Leave the keys un-pressed before executing the command, 1 second later, gently press down all the keys (not neccessarily all of them simultanously, just to cover them all). After calibration, keys are ready for play. You can use some MIDI software to test the keys. If all keys work fine, you can proceed to the next step. If not, you need to check the soldering of the hall effect sensors and the multiplexer.
-9. Apply the 1mm thick foam tape on the edge of the panel parts. It damps the key release noise.
-10. Use the M2*8mm screws to fix the panel parts to the support parts.
-11. Use the M3*10mm screws to fix the rear parts to the base parts.
-12. Now calibrate the key travel again use `calibrate travel` command, don't forget to gently press down all the keys 1 second after executing the command.
+   <img src="doc/key_rotate.jpg" width="60%">  
+   <img src="doc/key_magnet1.jpg" width="50%">  
+   <img src="doc/key_magnet2.jpg" width="50%">
+6. Install the springs on the base parts, and rotate the keys onto them.
+   <img src="doc/key_spring1.jpg" width="50%">  
+   <img src="doc/key_spring2.jpg" width="50%">
+7. Now we temporarily calibrate and test the keys use `calibrate travel` command. Leave the keys un-pressed before executing the command, 1 second later, gently press down all the keys (not neccessarily all of them simultanously, just to cover them all). After calibration, keys are ready for play. You can use some MIDI software to test the keys. If all keys work fine, you can proceed to the next step. If not, you need to check the soldering of the hall effect sensors and the multiplexer.  
+   <img src="doc/key_test.jpg" width="60%">
+8. Apply the 1mm thick foam tape on the edge of the panel parts. It damps the key release noise.  
+   <img src="doc/release_damping.jpg" width="50%">
+9.  Use the M2*8mm countersunk screws to fix the panel parts to the support parts.  
+    <img src="doc/panel_screws.jpg" width="70%">
+10. Use the M3*10mm screws to fix the rear parts to the base parts.  
+    <img src="doc/rear_screws.jpg" width="70%">
+11. Now calibrate the key travel again use `calibrate travel` command, don't forget to gently press down all the keys 1 second after executing the command.
+12. Apply the silicone self-adhesive anti-slip pads on the bottom of the base parts.  
+    <img src="doc/anti_slip.jpg" width="50%">
 13. Congratulations, you finished!
+    <img src="doc/finished.jpg" width="70%">
 
 #### Caution
 * Don't use `calibrate origin` command after the assembly. It can only be used when there's no magnets installed.
