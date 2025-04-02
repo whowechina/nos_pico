@@ -59,7 +59,8 @@ uint8_t const* tud_descriptor_device_cb(void) {
 
 uint8_t const desc_hid_report_joy[] = {
     NOS_PICO_REPORT_DESC_JOYSTICK,
-    NOS_PICO_REPORT_DESC_LIGHTS,
+    NOS_PICO_REPORT_DESC_LIGHT_B,
+    NOS_PICO_REPORT_DESC_LIGHT_A,
 };
 
 // Invoked when received GET HID REPORT DESCRIPTOR
@@ -134,38 +135,15 @@ static char serial_number_str[24] = "123456\0";
 static const char *string_desc_arr[] = {
     (const char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
     "WHowe",                     // 1: Manufacturer
-    "Nos Pico",                // 2: Product
+    "Nos Pico",                  // 2: Product
     serial_number_str,           // 3: Serials, use chip ID
     "Nos Pico",
     "Nos Pico CLI Port",
     "Nos MIDI Port",
-    "Spinner 1 R",
-    "Spinner 1 G",
-    "Spinner 1 B",
-    "Spinner 2 R",
-    "Spinner 2 G",
-    "Spinner 2 B",
-    "Spinner 3 R",
-    "Spinner 3 G",
-    "Spinner 3 B",
-    "Spinner 4 R",
-    "Spinner 4 G",
-    "Spinner 4 B",
-    "Spinner 5 R",
-    "Spinner 5 G",
-    "Spinner 5 B",
-    "Title R",
-    "Title G",
-    "Title B",
-    "Pedal 1 R",
-    "Pedal 1 G",
-    "Pedal 1 B",
-    "Pedal 2 R",
-    "Pedal 2 G",
-    "Pedal 2 B",
-    "Pedal 3 R",
-    "Pedal 3 G",
-    "Pedal 3 B",
+    "Logo Red",                  // 7
+    "Logo Green",                // 8
+    "Logo Blue",                 // 9
+                                 // 10...
 };
 
 // Invoked when received GET STRING DESCRIPTOR request
@@ -173,12 +151,12 @@ static const char *string_desc_arr[] = {
 // enough for transfer to complete
 uint16_t const* tud_descriptor_string_cb(uint8_t index, uint16_t langid)
 {
-    static uint16_t _desc_str[128];
+    static uint16_t str_u16[128];
 
     if (index == 0) {
-        memcpy(&_desc_str[1], string_desc_arr[0], 2);
-        _desc_str[0] = (TUSB_DESC_STRING << 8) | (2 + 2);
-        return _desc_str;
+        memcpy(&str_u16[1], string_desc_arr[0], 2);
+        str_u16[0] = (TUSB_DESC_STRING << 8) | (2 + 2);
+        return str_u16;
     }
 
     if (index == 3) {
@@ -187,19 +165,27 @@ uint16_t const* tud_descriptor_string_cb(uint8_t index, uint16_t langid)
         sprintf(serial_number_str, "%016llx", *(uint64_t *)&board_id);
     }
 
-    const char *str = string_desc_arr[index];
+    char str[64];
+    if (index < 10) {
+        strcpy(str, string_desc_arr[index]); // caution: no protection here
+    } else {
+        static const char *colors[] = { "Red", "Green", "Blue" };
+        int led = index - 10;
+        sprintf(str, "Key %d %s", led / 3 + 1, colors[led % 3]);
+    }
+
     uint8_t chr_count = strlen(str);
-    if (chr_count > count_of(_desc_str)) {
-        chr_count = count_of(_desc_str);
+    if (chr_count > count_of(str_u16)) {
+        chr_count = count_of(str_u16);
     }
 
     // Convert ASCII string into UTF-16
     for (uint8_t i = 0; i < chr_count; i++) {
-        _desc_str[1 + i] = str[i];
+        str_u16[1 + i] = str[i];
     }
 
     // first byte is length (including header), second byte is string type
-    _desc_str[0] = (TUSB_DESC_STRING << 8) | (2 * chr_count + 2);
+    str_u16[0] = (TUSB_DESC_STRING << 8) | (2 * chr_count + 2);
 
-    return _desc_str;
+    return str_u16;
 }

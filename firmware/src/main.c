@@ -223,6 +223,27 @@ void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id,
                            hid_report_type_t report_type, uint8_t const *buffer,
                            uint16_t bufsize)
 {
-    if (report_id == REPORT_ID_LIGHTS) {
+    if (report_id == REPORT_ID_LIGHT_A) {
+        if (bufsize < 3) {
+            return;
+        }
+        light_set_logo(rgb32(buffer[0], buffer[1], buffer[2], false), true);
+        if (bufsize < 45) {
+            return;
+        }
+        for (int i = 0; i < 14; i++) {
+            const uint8_t *rgb = buffer + i * 3 + 3;
+            light_set_key(i, rgb32(rgb[0], rgb[1], rgb[2], false), true);
+        }
+    } else if (report_id == REPORT_ID_LIGHT_B) {
+        if (bufsize < 42) {
+            return;
+        }
+        for (int i = 0; i < 14; i ++) {
+            const uint8_t *rgb = buffer + i * 3;
+            light_set_key(i + 14, rgb32(rgb[0], rgb[1], rgb[2], false), true);
+        }
+    } else {
+        printf("Set from USB %d-%d\n", report_id, report_type);
     }
 }
