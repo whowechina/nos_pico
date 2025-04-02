@@ -3137,7 +3137,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_plus:SOT-23-FAT"
 			(at 2.54 -8.89 0)
 			(effects
 				(font
