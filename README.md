@@ -67,7 +67,7 @@ I made this project in my personal time without any sponsorship. I will continue
 * 1x 0603 2kohm resistor for signal divider.
 * 28x SS49E linear Hall effect sensors (SOT23).
 * 1x Small 3V to 5V DC-DC step up or up-down converter. Make sure its output is 5V and input range covers 3.3V. If the one you get has different pinout, you need to hand wire it.  
-https://www.dfrobot.com/product-1766.html
+  https://www.dfrobot.com/product-1766.html
 
 * for Nos Pico only:
   * 56x WS2812B-4020 RGB LEDs (side facing)
@@ -132,7 +132,7 @@ https://www.dfrobot.com/product-1766.html
 * Keys: `Key.3mf`. Print 28 keys, 8 all-white, and 20 white-with-black tops (with "black key"). You need multi-color printing for the keys, or you need to manually paint the black part.  
   <img src="doc/keys.jpg" width="50%">
 * Base: `Base_*.stl`, all in light apricot color.
-* Rear: `Rear_*.stl`, all in light apricot color. Make the side with the screws as the bottom and enable support.
+* Rear: `Rear_*.stl`, all in light apricot color. Make the side with the screws as the bottom and **enable support**.
 * Support: `Support_*.stl`, Left and Right are in light apricot color and Center is in white color.
 * Panel: `Panel_*.stl`, Left and Right are in light apricot color. The Center is in white color with the black logo on top. You can use multi-color to print it or paint it manually.
 
@@ -167,7 +167,7 @@ Please note that the pictures in this section are mixed with Nos Pico and Nos Pi
    <img src="doc/pcb_screws.jpg" width="70%">
 2. Apply the 2.5mm thick foam tape on PCB, right below the hall effect sensors. It damps the key press noise. 3mm width is recommended for Nos Pico, and 5mm width is recommended for Nos Pico+.  
    <img src="doc/press_damping.jpg" width="50%">
-3. Use the M3*8mm screws to fix the support parts to the base part. The support part is the one with 2 holes for the USB port.
+3. Use the M3*8mm screws to fix the support parts to the base part.  
    <img src="doc/support_screws.jpg" width="70%">
 4. Insert the steel shafts into keys and install them into the base parts. Please note the key arrangements.  
    <img src="doc/key_assembly1.jpg" width="50%">  
@@ -195,11 +195,11 @@ Please note that the pictures in this section are mixed with Nos Pico and Nos Pi
 
 #### Caution
 * Don't use `calibrate origin` command after the assembly. It can only be used when there's no magnets installed.
-* Screws are easy to break the 3D printed parts. So don't screw them too fast or too tight. When you notice the resistance suddenly increases, stop screwing.
+* Screws are easy to break 3D printed parts. So don't screw them too fast or too tight. When you notice the resistance suddenly increases, stop immediately.
 
 ### Firmware
 * UF2 file is in `Production\Firmware` folder.
-* For the new build, hold the BOOTSEL button while connect the USB to a PC, there will be a disk named "RPI-RP2" showed up. Drag the UF2 firmware binary file into it. That's it. There's a small hole at the bottom side of the Nos Pico, it is facing right to the BOOTSEL button.
+* For the new build, hold the BOOTSEL button while connect the USB to a PC, there will be a disk named "RPI-RP2" showed up. Drag the UF2 firmware binary file into it. That's it. Note that there's a small hole on the bottom side of the Nos Pico, aligned with the BOOTSEL button.
 * If it's already running Nos Pico firmware, you can either use "update" in command line or hold down left 2 buttons while connecting to USB to enter update mode.
 * To access the command line, you can use this Web Serial Terminal to connect to the command line port of the controller. (Note: "?" is for help)  
   https://googlechromelabs.github.io/serial-terminal/
