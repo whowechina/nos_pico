@@ -3186,7 +3186,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+			(property "Footprint" "nos_main:SOT-23-FAT"
 				(at 2.54 -8.89 0)
 				(effects
 					(font
@@ -10746,7 +10746,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 383.54 187.325 0)
 			(effects
 				(font
@@ -11044,7 +11044,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 288.29 161.925 0)
 			(effects
 				(font
@@ -11190,7 +11190,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 307.34 161.925 0)
 			(effects
 				(font
@@ -11342,7 +11342,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 402.59 212.725 0)
 			(effects
 				(font
@@ -11418,7 +11418,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 364.49 238.125 0)
 			(effects
 				(font
@@ -11494,7 +11494,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 288.29 238.125 0)
 			(effects
 				(font
@@ -11640,7 +11640,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 307.34 187.325 0)
 			(effects
 				(font
@@ -14606,7 +14606,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 402.59 187.325 0)
 			(effects
 				(font
@@ -14682,7 +14682,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 288.29 212.725 0)
 			(effects
 				(font
@@ -14758,7 +14758,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 364.49 212.725 0)
 			(effects
 				(font
@@ -15900,7 +15900,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 345.44 212.725 0)
 			(effects
 				(font
@@ -18379,7 +18379,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 402.59 238.125 0)
 			(effects
 				(font
@@ -18755,7 +18755,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 307.34 238.125 0)
 			(effects
 				(font
@@ -18831,7 +18831,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 326.39 238.125 0)
 			(effects
 				(font
@@ -18907,7 +18907,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 345.44 161.925 0)
 			(effects
 				(font
@@ -19405,7 +19405,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 288.29 187.325 0)
 			(effects
 				(font
@@ -19616,7 +19616,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 383.54 161.925 0)
 			(effects
 				(font
@@ -19908,7 +19908,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 364.49 161.925 0)
 			(effects
 				(font
@@ -20871,7 +20871,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 326.39 161.925 0)
 			(effects
 				(font
@@ -20947,7 +20947,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 326.39 212.725 0)
 			(effects
 				(font
@@ -21307,7 +21307,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 326.39 187.325 0)
 			(effects
 				(font
@@ -21523,7 +21523,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 364.49 187.325 0)
 			(effects
 				(font
@@ -21599,7 +21599,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 345.44 238.125 0)
 			(effects
 				(font
@@ -21962,7 +21962,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "nos_main:D_SOD-123_LONG"
 			(at 181.61 38.1 0)
 			(effects
 				(font
@@ -22279,7 +22279,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 402.59 161.925 0)
 			(effects
 				(font
@@ -22853,7 +22853,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 383.54 212.725 0)
 			(effects
 				(font
@@ -23075,7 +23075,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 383.54 238.125 0)
 			(effects
 				(font
@@ -23286,7 +23286,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 307.34 212.725 0)
 			(effects
 				(font
@@ -23697,7 +23697,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
+		(property "Footprint" "nos_main:SOT-23-FAT"
 			(at 345.44 187.325 0)
 			(effects
 				(font
