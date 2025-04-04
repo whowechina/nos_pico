@@ -53,7 +53,7 @@ void hammer_init()
     //gpio_pull_down(26 + ADC_CHANNEL);
 
     // pwm mode for lower power ripple
-    gpio_set_function(25, GPIO_FUNC_PWM);
+    gpio_init(25);
     gpio_set_dir(25, GPIO_OUT);
     gpio_put(25, 1);
 }
