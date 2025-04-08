@@ -157,3 +157,21 @@ void light_set_logo(uint32_t color, bool hid)
         buf_logo[i] = apply_level(color, nos_cfg->light.level_logo);
     }
 }
+
+
+void light_set_subkey(uint8_t index, bool upper, uint32_t color)
+{
+    if (index >= 28) {
+        return;
+    }
+    uint32_t new_color = apply_level(color, nos_cfg->light.level_key);
+    buf_key[index * 2 + (upper ? 0 : 1)] = new_color;
+}
+
+void light_set_sublogo(uint8_t index, uint32_t color)
+{
+    if (index >= 6) {
+        return;
+    }
+    buf_logo[index] = apply_level(color, nos_cfg->light.level_logo);
+}

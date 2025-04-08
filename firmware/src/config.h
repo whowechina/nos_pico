@@ -29,6 +29,12 @@ typedef struct __attribute__((packed)) {
         bool midi : 1;
         uint8_t reserved[15];
     } hid;
+    struct {
+        uint8_t b1;
+        uint8_t b2;
+        uint8_t b3;
+        uint8_t b4;
+    } buttons;
 } nos_cfg_t;
 
 typedef struct {

@@ -25,6 +25,7 @@
 #include "board_defs.h"
 
 #include "savedata.h"
+#include "setup.h"
 #include "config.h"
 #include "cli.h"
 #include "commands.h"
@@ -65,7 +66,9 @@ static void core1_loop()
     sleep_ms(500);
     while (1) {
         if (mutex_try_enter(&core1_io_lock, NULL)) {
-            run_lights();
+            if (!setup_is_active()) {
+                run_lights();
+            }
             light_update();
             mutex_exit(&core1_io_lock);
         }
@@ -146,6 +149,7 @@ static void core0_loop()
         proc_midi();
         button_update();
         hid_update();
+        setup_update();
 
         cli_fps_count(0);
         sleep_until(next_frame);

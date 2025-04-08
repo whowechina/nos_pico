@@ -21,5 +21,7 @@ uint32_t rgb32_from_hsv(uint8_t h, uint8_t s, uint8_t v);
 void light_set_key(uint8_t index, uint32_t color, bool hid);
 void light_set_logo(uint32_t color, bool hid);
 
+void light_set_subkey(uint8_t index, bool up_down, uint32_t color);
+void light_set_sublogo(uint8_t index, uint32_t color);
 
 #endif
