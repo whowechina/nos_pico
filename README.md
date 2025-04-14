@@ -65,7 +65,7 @@ I made this project in my personal time without any sponsorship. I will continue
 * 20x to 30x 0603 0.1uF (0.1~1uF all fine) capacitors.
 * 3x 0603 5.1kohm resistors, 2 for USB and 1 for signal divider.
 * 1x 0603 2kohm resistor for signal divider.
-* 28x SS49E linear Hall effect sensors (SOT23).
+* 28x SS39ET linear Hall effect sensors (SOT23).
 * 1x Small 3V to 5V DC-DC step up or up-down converter. Make sure its output is 5V and input range covers 3.3V. If the one you get has different pinout, you need to hand wire it.  
   https://www.dfrobot.com/product-1766.html
 
