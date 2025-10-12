@@ -153,11 +153,11 @@ Please note that the quantities of the screws are approximate.
 * Some 10mm diameter silicone self-adhesive anti-slip pads.  
 
 * For Nos Pico only.
-  * 7x 2mm\*50mm steel shafts. (alternatively 14x 2mm\*25mm).
+  * 1x 2mm\*350mm stainless steel wire, or alternatively 7x 2mm\*30mm steel wire shafts.
   * 28x 2mm\*2mm axial magnetized cylinder magnets (2mm diameter, 2mm height).
 
 * For Nos Pico+ only.
-  * 14x 2mm\*40mm steel shafts. (alternatively 7x 2mm\*80mm).
+  * 1x 2mm\*560mm stainless steel wire, or alternatively 7x 2mm\*80mm steel wire shafts.
   * 28x 3mm\*2mm axial magnetized cylinder magnets (3mm diameter, 2mm height).
 
 #### Steps
