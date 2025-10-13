@@ -209,6 +209,13 @@ Please note that the pictures in this section are mixed with Nos Pico and Nos Pi
 * You can change the report to HID buttons, or HID analog values (axis) with `hid *` command.
 * You can change the key light mode using `light *` command.
 * You can change the light brightness using `level <key|logo>` command.
+* You can do live setting without the command line interface. Let's call the 4 auxilary keys are L1, L2, R1, R2. Pressing all of them at the same time will enter the live setting mode.
+  * L1 and L2 are for navigating the setting items. The logo light shows current item. The items are:
+    * Brightness for Piano Key Light
+    * Brightness for Logo Light
+    * Piano Key Light Mode (Off, Switch, Pressure, Velocity)
+  * R1 is Cancel, R2 is Confirm.
+  * The piano keys are for changing the values of the setting items.  
 
 ## CAD Source File
 I'm using OnShape free subscription. It's powerful but it can't archive original designs to local, so I can only share the link here. STL/DXF/DWG files are exported from this online document.  
