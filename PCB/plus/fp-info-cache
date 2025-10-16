@@ -1,4 +1,4 @@
-24778026385962018
+24781519239835397
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -99610,6 +99610,13 @@ DCDC SMD
 4
 4
 nos_plus
+D_SOD-123_LONG
+SOD-123
+SOD-123
+0
+2
+2
+nos_plus
 PN532
 
 
@@ -99651,6 +99658,13 @@ Through hole pin header THT 2x20 2.54mm double row
 0
 46
 46
+nos_plus
+SOT-23-FAT
+SOT, 3 Pin (JEDEC MO-178 inferred 3-pin variant https://www.jedec.org/document_search?search_api_views_fulltext=MO-178), generated with kicad-footprint-generator ipc_gullwing_generator.py
+SOT TO_SOT_SMD
+0
+3
+3
 nos_plus
 SW_Choc_V1V2_Cherry_MX_LED
 Kailh Choc keyswitch CPG1350 V1 CPG1353 V2 with 1.00u keycap
