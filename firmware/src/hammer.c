@@ -152,6 +152,13 @@ void hammer_update()
     time_old[2] = time_old[1];
     time_old[1] = time_old[0];
     time_old[0] = reading_time;
+
+    if (nos_runtime.debug.sensor) {
+        for (int i = 0; i < KEY_NUM; i++) {
+            printf(" %4d", reading[i]);
+        }
+        printf("\n");
+    }
 }
 
 uint16_t hammer_velocity(uint8_t chn)
@@ -258,15 +265,17 @@ void hammer_calibrate_travel()
         }
     }
 
+    #define SENSITIVITY 20
+
     bool success = true;
     for (int i = 0; i < 28; i++) {
         int npole_val = max[i] - released[i];
         int spole_val = released[i] - min[i];
-        bool npole = npole_val > 400;
-        bool spole = spole_val > 400;
+        bool npole = npole_val > SENSITIVITY * 8;
+        bool spole = spole_val > SENSITIVITY * 8;
         if (npole != spole) {
-            pressed[i] = npole ? max[i] - 50 : min[i] + 50;
-            released[i] += npole ? 150 : -150;
+            pressed[i] = npole ? max[i] - SENSITIVITY : min[i] + SENSITIVITY;
+            released[i] += npole ? SENSITIVITY * 2 : -SENSITIVITY * 2;
         } else {
             printf("Key %d calibration failed. [%d-%d-%d].\n", i, min[i], released[i], max[i]);
             success = false;
