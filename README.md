@@ -153,11 +153,11 @@ Please note that the quantities of the screws are approximate.
 * Some 10mm diameter silicone self-adhesive anti-slip pads.  
 
 * For Nos Pico only.
-  * 1x 2mm\*350mm stainless steel wire, or alternatively 7x 2mm\*30mm steel wire shafts.
+  * 1x 2mm\*361mm stainless steel wire shaft.
   * 28x 2mm\*2mm axial magnetized cylinder magnets (2mm diameter, 2mm height).
 
 * For Nos Pico+ only.
-  * 1x 2mm\*560mm stainless steel wire, or alternatively 7x 2mm\*80mm steel wire shafts.
+  * 1x 2mm\*573mm stainless steel wire shaft.
   * 28x 3mm\*2mm axial magnetized cylinder magnets (3mm diameter, 2mm height).
 
 #### Steps
@@ -185,7 +185,7 @@ Please note that the pictures in this section are mixed with Nos Pico and Nos Pi
    <img src="doc/release_damping.jpg" width="50%">
 9.  Use the M2*8mm countersunk screws to fix the panel parts to the support parts.  
     <img src="doc/panel_screws.jpg" width="70%">
-10. Use the M3*10mm screws to fix the rear parts to the base parts.  
+10. Use the M3*10mm screws to fix the rear parts to the base parts. Please note that left and right rear parts have a shaft limit slot, which is blocked by thin walls working as print support, you need to cut them open.  
     <img src="doc/rear_screws.jpg" width="70%">
 11. Now calibrate the key travel again use `calibrate travel` command, don't forget to gently press down all the keys 1 second after executing the command.
 12. Apply the silicone self-adhesive anti-slip pads on the bottom of the base parts.  

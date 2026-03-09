@@ -151,11 +151,11 @@ https://discord.gg/M8f2PPQFEA
 * 一些直径为 10mm 的硅胶自粘防滑垫。
 
 * 仅适用于 Nos Pico：
-  * 1 根 2mm\*350mm 不锈钢丝（或者 7 根 2mm\*30mm 不锈钢丝光轴）。
+  * 1 根 2mm\*361mm 不锈钢丝光轴。
   * 28 个 2mm\*2mm 轴向磁化圆柱形磁铁（直径 2mm，高度 2mm）。
 
 * 仅适用于 Nos Pico+：
-  * 1 根 2mm\*560mm 不锈钢丝（或者 7 根 2mm\*80mm 不锈钢丝光轴）。
+  * 1 根 2mm\*573mm 不锈钢丝光轴。
   * 28 个 3mm\*2mm 轴向磁化圆柱形磁铁（直径 3mm，高度 2mm）。
 
 #### 步骤
@@ -183,7 +183,7 @@ https://discord.gg/M8f2PPQFEA
    <img src="doc/release_damping.jpg" width="50%">
 9. 使用 M2\*8mm 平头螺丝将面板部件固定到支撑部件上。  
    <img src="doc/panel_screws.jpg" width="70%">
-10. 使用 M3\*10mm 螺丝将后盖固定到底座部件上。  
+10. 使用 M3\*10mm 螺丝将后盖固定到底座部件上。注意左右后盖部件有一个轴限制槽，被作为打印支撑的薄壁挡住了，你需要将它们切开。  
     <img src="doc/rear_screws.jpg" width="70%">
 11. 再次使用 `calibrate travel` 命令校准按键行程，不要忘记在执行命令 1 秒后温柔的按下所有按键。
 12. 在底座部件的底部贴上硅胶自粘防滑垫。  
