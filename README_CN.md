@@ -68,7 +68,7 @@
 * 3 个 0603 尺寸的 5.1kΩ 电阻，2 个用于 USB，1 个用于信号分压。
 * 1 个 0603 尺寸的 2kΩ 电阻，用于信号分压。
 * 28 个 SS49E 线性霍尔效应传感器（SOT23 封装）。
-* 1 个小型 3V 到 5V 的 DC-DC 升压或升降压转换器。确保输出为 5V，输入范围覆盖 3.3V。如果你购买的模块引脚定义不同，则需要手动接线。  
+* 1 个小型 3V 到 5V 的 DC-DC 升压或升降压转换器。确保输出为 5V，输入范围覆盖 3.3V。如果你购买的模块引脚定义不同，则需要手动接线。如果你在 PCB 上找不到该元件的焊盘，则说明它已经在新版本中已移除。  
   https://www.dfrobot.com/product-1766.html
 
 * 对于 Nos Pico：
@@ -82,6 +82,12 @@
   * 62 个 WS2812B-3528 RGB LED。
   * 4 个 凯华 Box 冰淇淋 Pro 按键开关。  
     https://www.kailh.net/products/kailh-box-cream-pro-switch-set
+
+* 注意：在较新的版本中，DC/DC 被移除，使用以下元件代替。
+  * 1x TPS7A2042PDBVR (4.2V) 或 LP5907MFX-4.5 (4.5V) LDO (SOT23-5)，(U7)。  
+    https://www.ti.com/product/TPS7A20/part-details/TPS7A2042PDBVR
+  * 1x LM4040 3.0V 并联电压基准，SOT23-3 封装 (U6). 市场上有很多型号，确保它是 3.0V 并且是在 SOT23-3 即可。
+  * R1 和 R2 分别是 2KΩ 和 5.1KΩ 的 0603 电阻。
 
 * 这是焊接完成后的 Nos Pico：  
   <img src="doc/pico_pcb1.jpg" width="70%">  

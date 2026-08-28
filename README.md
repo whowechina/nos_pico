@@ -69,7 +69,7 @@ If you're interested in buying from me, or for commercial use, please contact me
 * 3x 0603 5.1kohm resistors, 2 for USB and 1 for signal divider.
 * 1x 0603 2kohm resistor for signal divider.
 * 28x SS49E linear Hall effect sensors (SOT23).
-* 1x Small 3V to 5V DC-DC step up or up-down converter. Make sure its output is 5V and input range covers 3.3V. If the one you get has different pinout, you need to hand wire it.  
+* 1x Small 3V to 5V DC-DC step up or up-down converter. Make sure its output is 5V and input range covers 3.3V. If the one you get has different pinout, you need to hand wire it. If you don't see the footprint in the PCB, that means it's removed from newer revisions.  
   https://www.dfrobot.com/product-1766.html
 
 * for Nos Pico only:
@@ -83,6 +83,12 @@ If you're interested in buying from me, or for commercial use, please contact me
   * 62x WS2812B-3528 RGB LEDs.
   * 4x Kailh Box Cream Pro switches.  
     https://www.kailh.net/products/kailh-box-cream-pro-switch-set
+
+* Note: in newer revisions, the DC/DC is removed, use the following components instead.
+  * 1x TPS7A2042PDBVR (4.2V) or LP5907MFX-4.5 (4.5V) LDO (SOT23-5), (U7).  
+    https://www.ti.com/product/TPS7A20/part-details/TPS7A2042PDBVR
+  * 1x LM4040 3.0V Shunt Voltage Reference, in SOT23-3 (U6). There're many models; make sure it's 3.0V and in an SOT23-3 package.
+  * R1 and R2 are 2Kohm and 5.1Kohm 0603 resistors, respectively.
 
 * This is how Nos Pico looks after soldering.  
   <img src="doc/pico_pcb1.jpg" width="70%">  
